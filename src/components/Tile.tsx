@@ -4,15 +4,25 @@ interface Props {
     x: number;
     y: number;
     width: number;
-    terrain: string;
+    terrain: Terrain;
     number?: number;
 }
 
+export type Terrain = "Hills" | "Forest" | "Mountains" | "Fields" | "Pasture" | "Desert"
+
 export default function Tile(props: Props) {
+    const terrainColors: Record<Terrain, string> = {
+        "Hills": "#FF0000",
+        "Forest": "#008000",
+        "Mountains": "#808080",
+        "Fields": "#808000",
+        "Pasture": "#00FF00",
+        "Desert": "#FFC080"
+    }
+    let color = terrainColors[props.terrain];
     return (
         <>
-            <Hexagon x={props.x} y={props.y} width={props.width}/>
-            <circle cx={props.x} cy={props.y} r={props.width / 5} fill="#C0C0C0" />
+            <Hexagon x={props.x} y={props.y} width={props.width} fill={color}/>
         </>
     )
 }
