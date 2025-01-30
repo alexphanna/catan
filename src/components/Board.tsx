@@ -1,18 +1,14 @@
 import Tile from "./Tile";
-import { Terrain } from "./Tile";
+import Building from "./Building";
+import Hexagon from "./Hexagon";
 
-interface Props {
-  width: number;
-  height: number;
-}
-
-export default function Board(props: Props) {
+export default function Board() {
   const board = [
     [0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
+    //[0, 0, 0, 0, 0, 0],
+    //[0, 0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0],
   ];
@@ -37,14 +33,14 @@ export default function Board(props: Props) {
         row?.map((_col, j) => (
           <Tile
             x={
-              j * inradius * 2 +
-              inradius * (maxLength + 1 - board[i].length) +
-              leftMargin
+              j * inradius * 2 + inradius * (maxLength + 1 - board[i].length)
             }
             y={
               i *
                 (sideLength +
-                  Math.sqrt(Math.pow(sideLength, 2) - Math.pow(inradius, 2))) +
+                  Math.sqrt(
+                    Math.pow(sideLength, 2) - Math.pow(inradius, 2)
+                  )) +
               circumradius +
               topMargin
             }
