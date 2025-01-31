@@ -6,10 +6,11 @@ interface Props {
   y: number;
   width: number;
   fill: string;
+  buildingSettlement: boolean;
+  buildingRoad: boolean;
 }
 
 export default function Hexagon(props: Props) {
-  let [showHotspots, setShowHotspots] = useState(false);
   let vertices: number[][] = [];
   let shortenedVertices: number[][] = [];
   let sideLength = (props.width / 2) * (2 / Math.sqrt(3));
@@ -48,9 +49,9 @@ export default function Hexagon(props: Props) {
           />
         </clipPath>
       </defs>
-      {true ? (
+      {props.buildingSettlement || props.buildingRoad ? (
         <>
-          {edges.map((vertex) => (
+          {(props.buildingSettlement ? vertices : edges).map((vertex) => (
             <PlacePoint
               r={2}
               cx={vertex[0]}

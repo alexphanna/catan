@@ -6,6 +6,8 @@ interface Props {
   width: number;
   terrain: Terrain;
   number?: number;
+  buildingSettlement: boolean;
+  buildingRoad: boolean;
 }
 
 export type Terrain =
@@ -37,7 +39,7 @@ export default function Tile(props: Props) {
     terrainColors[terrains[Math.floor(Math.random() * terrains.length)]];
   return (
     <g className="tile">
-      <Hexagon x={props.x} y={props.y} width={props.width} fill={color} />
+      <Hexagon x={props.x} y={props.y} width={props.width} fill={color} buildingSettlement={props.buildingSettlement} buildingRoad={props.buildingRoad} />
       <text x={props.x} y={props.y} fontSize={props.width / Math.sqrt(3) / 2}>
         {Math.floor(Math.random() * 11) + 2}
       </text>

@@ -5,11 +5,10 @@
     font-family: 'Jost';
 }
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 text {
     text-anchor: middle;

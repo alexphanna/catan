@@ -2,7 +2,12 @@ import Tile from "./Tile";
 import Building from "./Building";
 import Hexagon from "./Hexagon";
 
-export default function Board() {
+interface Props {
+  buildingSettlement: boolean;
+  buildingRoad: boolean;
+}
+
+export default function Board(props: Props) {
   const board = [
     [0, 0, 0],
     [0, 0, 0, 0],
@@ -28,24 +33,22 @@ export default function Board() {
   }
 
   return (
-    <svg width="80vh" height="80vw" viewBox="0 0 100 100">
+    <svg width="80vw" height="80vh" viewBox="0 0 100 100">
       {board.map((row, i) =>
         row?.map((_col, j) => (
           <Tile
-            x={
-              j * inradius * 2 + inradius * (maxLength + 1 - board[i].length)
-            }
+            x={j * inradius * 2 + inradius * (maxLength + 1 - board[i].length)}
             y={
               i *
                 (sideLength +
-                  Math.sqrt(
-                    Math.pow(sideLength, 2) - Math.pow(inradius, 2)
-                  )) +
+                  Math.sqrt(Math.pow(sideLength, 2) - Math.pow(inradius, 2))) +
               circumradius +
               topMargin
             }
             width={inradius * 2}
             terrain={"Desert"}
+            buildingSettlement={props.buildingSettlement}
+            buildingRoad={props.buildingRoad}
           />
         ))
       )}
