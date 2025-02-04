@@ -3,6 +3,8 @@
     width: 100vw;
     bottom: 0px;
     text-align: left;
+    display: flex;
+    justify-content: space-between;
 }
 .button {
     background-color: transparent;

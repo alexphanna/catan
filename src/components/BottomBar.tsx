@@ -9,23 +9,34 @@ interface Props {
 export default function BottomBar(props: Props) {
   return (
     <div className={styles.bar}>
-      <button
-        className={styles.button}
-        onClick={() => {
-          props.buildingRoad(false);
-          props.buildingSettlement(true);
-        }}
-      >
-        SETTLEMENT
-      </button>
+      <div>
+        <button
+          className={styles.button}
+          onClick={() => {
+            props.buildingRoad(false);
+            props.buildingSettlement(true);
+          }}
+        >
+          SETTLEMENT
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => {
+            props.buildingSettlement(false);
+            props.buildingRoad(true);
+          }}
+        >
+          ROAD
+        </button>
+      </div>
       <button
         className={styles.button}
         onClick={() => {
           props.buildingSettlement(false);
-          props.buildingRoad(true);
+          props.buildingRoad(false);
         }}
       >
-        ROAD
+        CANCEL
       </button>
     </div>
   );

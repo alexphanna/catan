@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PlacePoint from "./PlacePoint";
+import PlaceRoad from "./PlaceRoad";
 
 interface Props {
   x: number;
@@ -26,11 +27,14 @@ export default function Hexagon(props: Props) {
     ]);
   }
   // egdges
-  let edges: number[][] = [];
+  let edges: number[][][] = [];
   for (let i = 0; i < 6; i++) {
     edges.push([
-      (vertices[i][0] + vertices[(i + 1) % vertices.length][0]) / 2,
-      (vertices[i][1] + vertices[(i + 1) % vertices.length][1]) / 2,
+      [vertices[i][0], vertices[i][1]],
+      [
+        vertices[(i + 1) % vertices.length][0],
+        vertices[(i + 1) % vertices.length][1],
+      ],
     ]);
   }
   return (
@@ -51,14 +55,24 @@ export default function Hexagon(props: Props) {
       </defs>
       {props.buildingSettlement || props.buildingRoad ? (
         <>
-          {(props.buildingSettlement ? vertices : edges).map((vertex) => (
-            <PlacePoint
-              r={2}
-              cx={vertex[0]}
-              cy={vertex[1]}
-              clipPath={"url(#" + props.x + "" + props.y + ")"}
-            ></PlacePoint>
-          ))}
+          {props.buildingSettlement
+            ? vertices.map((vertex) => (
+                <PlacePoint
+                  r={2}
+                  cx={vertex[0]}
+                  cy={vertex[1]}
+                  clipPath={"url(#" + props.x + "" + props.y + ")"}
+                ></PlacePoint>
+              ))
+            : edges.map((vertex) => (
+                <PlaceRoad
+                  x1={vertex[0][0]}
+                  x2={vertex[1][0]}
+                  y1={vertex[0][1]}
+                  y2={vertex[1][1]}
+                  clipPath={"url(#" + props.x + "" + props.y + ")"}
+                ></PlaceRoad>
+              ))}
         </>
       ) : (
         <></>

@@ -22,6 +22,5 @@ export default function PlacePoint(props: Props) {
         setHovered(false);
       }}
     ></circle>
-    
   );
 }
